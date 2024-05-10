@@ -15,8 +15,9 @@
 ## Getting started
 
 - To run the project.
-* 1 - Yarn 
-* 2 - Yarn start
+* 1 - Node version >=18
+* 2 - Yarn 
+* 3 - Yarn start
 
 - To run the test.
 * 1 - Yarn test

@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "../components/Layout";
 import NavBar from "../components/Navbar";
-import ProductShow from "../modules/Products";
+import ProductShow from "../modules/Products/page";
 
 const RoutesConfig = () => {
   return (

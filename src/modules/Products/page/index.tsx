@@ -2,9 +2,9 @@ import { FilterByStatusContainer, Container } from "./styles";
 import React from "react";
 import { useQuery } from "react-query";
 
-import { Product } from "../../service/products/payload/productPayload";
-import { fetchProducts } from "../../service/products/ProductService";
-import ProductsList from "./components/ProductList";
+import { Product } from "../../../service/products/payload/productPayload";
+import { fetchProducts } from "../../../service/products/ProductService";
+import ProductsList from "../components/ProductList";
 
 const ProductShow: React.FC = () => {
   const pageToLoad = 1;

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
@@ -14,16 +14,26 @@ import {
   ProductTitle,
 } from "./styles";
 import { Product } from "../../../service/products/payload/productPayload";
+import { useEffect } from "react";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cartItems = useSelector((state: RootState) => state.cart.allProduct);
   const fildItem = cartItems.filter((item) => item.id === Number(id));
 
   const handleAddToCart = (product: Product) => {
     dispatch(addProductToCart(product));
   };
+  console.log(id);
+  console.log(cartItems);
+
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      navigate("/");
+    }
+  }, [cartItems, navigate]);
 
   return (
     <div

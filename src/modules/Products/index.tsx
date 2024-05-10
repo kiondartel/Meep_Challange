@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 
 import { Product } from "../../service/products/payload/productPayload";
 import { fetchProducts } from "../../service/products/ProductService";
+import ProductsList from "./components/ProductList";
 
 const ProductShow: React.FC = () => {
   const pageToLoad = 1;
@@ -24,7 +25,9 @@ const ProductShow: React.FC = () => {
 
   return (
     <Container>
-      <FilterByStatusContainer></FilterByStatusContainer>
+      <FilterByStatusContainer>
+        {products && <ProductsList products={products} />}
+      </FilterByStatusContainer>
     </Container>
   );
 };

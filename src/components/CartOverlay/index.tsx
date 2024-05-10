@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   CartOverlay,
   Title,
@@ -16,13 +16,16 @@ import {
 } from "./styles";
 
 import { useDispatch } from "react-redux";
-
+import { FaCheckCircle } from "react-icons/fa";
 import { Product } from "../../service/products/payload/productPayload";
 import {
+  clearCart,
   decrementProductQuantity,
   incrementProductQuantity,
   removeProductToCart,
 } from "../../store/reducers/cartReducer";
+import Loader from "../LoadingSpinner";
+import { useNavigate } from "react-router-dom";
 
 interface CartOverlayProps {
   isOpen: boolean;
@@ -38,7 +41,9 @@ const CartOverlayComponent: React.FC<CartOverlayProps> = ({
   totalPrice,
 }) => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [purchaseCompleted, setPurchaseCompleted] = useState<boolean>(false);
   const handleRemoveItem = (id: number) => {
     dispatch(removeProductToCart(id));
   };
@@ -63,6 +68,19 @@ const CartOverlayComponent: React.FC<CartOverlayProps> = ({
     return unique;
   }, [] as Product[]);
 
+  const handlePurchase = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      setPurchaseCompleted(true);
+      setTimeout(() => {
+        dispatch(clearCart());
+        setPurchaseCompleted(false);
+        setCartOpen(false);
+        navigate("/");
+      }, 2000);
+    }, 2000);
+  };
   return (
     <CartOverlay isOpen={isOpen}>
       <Title>
@@ -91,8 +109,16 @@ const CartOverlayComponent: React.FC<CartOverlayProps> = ({
           <h1>Total:</h1>
           <h1>R${totalPrice}</h1>
         </Total>
-        <Purchase>
-          <h1>Finalizar Compra</h1>
+        <Purchase onClick={handlePurchase}>
+          {isLoading ? (
+            <Loader />
+          ) : purchaseCompleted ? (
+            <h1>
+              Sucesso <FaCheckCircle size={20} />
+            </h1>
+          ) : (
+            <h1>Finalizar Compra</h1>
+          )}
         </Purchase>
       </TotalPrice>
     </CartOverlay>

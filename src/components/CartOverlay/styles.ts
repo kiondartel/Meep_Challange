@@ -13,7 +13,7 @@ export const CartOverlay = styled.div.withConfig({
   width: 560px;
   height: 100%;
 
-  background-color: #2a52be;
+  background: #ae67fa;
   z-index: 100;
   transition: transform 0.3s ease-in-out;
   transform: ${({ isOpen }) => (isOpen ? "translateX(0)" : "translateX(100%)")};
@@ -130,6 +130,7 @@ export const Purchase = styled.div`
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background-color: black;
+  background-color: #f49867;
+
   cursor: pointer;
 `;

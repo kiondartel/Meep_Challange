@@ -75,7 +75,7 @@ export const BuyButtonLink = styled(Link)`
   width: 350px;
 
   height: auto;
-  background-color: #007bff;
+  background: #f49867;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -86,7 +86,7 @@ export const BuyButtonLink = styled(Link)`
   text-decoration: none;
   cursor: pointer;
   &:hover {
-    background-color: #0056b3;
+    background-color: #ae67fa;
   }
 
   svg {

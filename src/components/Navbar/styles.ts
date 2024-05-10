@@ -7,7 +7,7 @@ export const NavbarContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   padding: 30px 20px;
-  background-color: #2a52be;
+  background: linear-gradient(89.97deg, #ae67fa 1.84%, #f49867 102.67%);
 `;
 
 export const Brand = styled(Link)`

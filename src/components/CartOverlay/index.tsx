@@ -69,17 +69,20 @@ const CartOverlayComponent: React.FC<CartOverlayProps> = ({
   }, [] as Product[]);
 
   const handlePurchase = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      setPurchaseCompleted(true);
+    if (uniqueItems.length > 0) {
+      setIsLoading(true);
       setTimeout(() => {
-        dispatch(clearCart());
-        setPurchaseCompleted(false);
-        setCartOpen(false);
-        navigate("/");
+        setIsLoading(false);
+        setPurchaseCompleted(true);
+        setTimeout(() => {
+          dispatch(clearCart());
+          setPurchaseCompleted(false);
+          setCartOpen(false);
+          navigate("/");
+        }, 2000);
       }, 2000);
-    }, 2000);
+    }
+    return;
   };
   return (
     <CartOverlay isOpen={isOpen}>
@@ -114,7 +117,7 @@ const CartOverlayComponent: React.FC<CartOverlayProps> = ({
             <Loader />
           ) : purchaseCompleted ? (
             <h1>
-              Sucesso <FaCheckCircle size={20} />
+              Sucesso! <FaCheckCircle size={20} />
             </h1>
           ) : (
             <h1>Finalizar Compra</h1>

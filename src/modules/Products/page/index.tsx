@@ -5,12 +5,15 @@ import { useQuery } from "react-query";
 import { Product } from "../../../service/products/payload/productPayload";
 import { fetchProducts } from "../../../service/products/ProductService";
 import ProductsList from "../components/ProductList";
+import { useDispatch } from "react-redux";
+import { setAllProducts } from "../../../store/reducers/cartReducer";
 
 const ProductShow: React.FC = () => {
   const pageToLoad = 1;
   const rowsPerPage = 10;
   const sortBy = "name";
   const orderBy = "ASC";
+  const dispatch = useDispatch();
   const {
     data: products,
     error,
@@ -22,7 +25,9 @@ const ProductShow: React.FC = () => {
       retry: true,
     }
   );
-
+  if (products) {
+    dispatch(setAllProducts(products));
+  }
   return (
     <Container>
       <FilterByStatusContainer>

@@ -13,7 +13,7 @@ const NavBar: React.FC = () => {
       <Brand to="/">
         <h1>Meep</h1>
       </Brand>
-      <ShoppingCart total={totalItemsInCart} />
+      <ShoppingCart total={totalItemsInCart} itens={cartItems} />
     </NavbarContainer>
   );
 };

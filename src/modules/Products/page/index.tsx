@@ -3,7 +3,7 @@ import React from "react";
 import { useQuery } from "react-query";
 
 import { Product } from "../../../service/products/payload/productPayload";
-import { fetchProducts } from "../../../service/products/ProductService";
+import { ProductService } from "../../../service/products/ProductService";
 import ProductsList from "../components/ProductList";
 import { useDispatch } from "react-redux";
 import { setAllProducts } from "../../../store/reducers/cartReducer";
@@ -15,20 +15,24 @@ const ProductShow: React.FC = () => {
   const sortBy = "name";
   const orderBy = "ASC";
   const dispatch = useDispatch();
+
   const {
     data: products,
     error,
     isLoading,
   } = useQuery<Product[], Error>(
     ["products", pageToLoad, rowsPerPage, sortBy, orderBy],
-    () => fetchProducts(pageToLoad, rowsPerPage, sortBy, orderBy),
+    () =>
+      ProductService.fetchProducts(pageToLoad, rowsPerPage, sortBy, orderBy),
     {
       retry: true,
     }
   );
+
   if (products) {
     dispatch(setAllProducts(products));
   }
+
   return (
     <Container>
       <FilterByStatusContainer>

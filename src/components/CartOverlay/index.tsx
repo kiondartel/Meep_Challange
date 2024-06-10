@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import {
   CartOverlay,
   Title,
@@ -44,29 +44,43 @@ const CartOverlayComponent: React.FC<CartOverlayProps> = ({
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [purchaseCompleted, setPurchaseCompleted] = useState<boolean>(false);
-  const handleRemoveItem = (id: number) => {
-    dispatch(removeProductToCart(id));
-  };
+  const handleRemoveItem = useCallback(
+    (id: number) => {
+      dispatch(removeProductToCart(id));
+    },
+    [dispatch]
+  );
 
-  const handleIncrement = (id: number) => {
-    dispatch(incrementProductQuantity(id));
-  };
+  const handleIncrement = useCallback(
+    (id: number) => {
+      dispatch(incrementProductQuantity(id));
+    },
+    [dispatch]
+  );
 
-  const handleDecrement = (id: number) => {
-    dispatch(decrementProductQuantity(id));
-  };
+  const handleDecrement = useCallback(
+    (id: number) => {
+      dispatch(decrementProductQuantity(id));
+    },
+    [dispatch]
+  );
 
-  const itemCounts = new Map<number, number>();
-  itens.forEach((item) => {
-    itemCounts.set(item.id, (itemCounts.get(item.id) || 0) + 1);
-  });
+  const itemCounts = useMemo(() => {
+    const counts = new Map<number, number>();
+    itens.forEach((item) => {
+      counts.set(item.id, (counts.get(item.id) || 0) + 1);
+    });
+    return counts;
+  }, [itens]);
 
-  const uniqueItems = itens.reduce((unique: Product[], item) => {
-    if (!unique.some((obj) => obj.id === item.id)) {
-      unique.push(item);
-    }
-    return unique;
-  }, [] as Product[]);
+  const uniqueItems = useMemo(() => {
+    return itens.reduce((unique: Product[], item) => {
+      if (!unique.some((u) => u.id === item.id)) {
+        unique.push(item);
+      }
+      return unique;
+    }, []);
+  }, [itens]);
 
   const handlePurchase = () => {
     if (uniqueItems.length > 0) {

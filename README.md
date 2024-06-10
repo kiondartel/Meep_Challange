@@ -28,10 +28,6 @@
 
 ![Homepage image](https://github.com/kiondartel/Meep_Challange/blob/master/public/assets/home.jpg)
 
-### 2 - Ao clicar em um produto é possível ver suas especificações.
-
-![Deatils image](https://github.com/kiondartel/Meep_Challange/blob/master/public/assets/detail.jpg)
-
-### 3 - Ao clicar no carrinho é possível ver o seus itens bem, como adicionar mais unidades, caso tenha itens no carrinho será possível efetuar a compra.
+### 2 - Ao clicar no carrinho é possível ver o seus itens bem, como adicionar mais unidades, caso tenha itens no carrinho será possível efetuar a compra.
 
 ![cart image](https://github.com/kiondartel/Meep_Challange/blob/master/public/assets/cart.jpg)

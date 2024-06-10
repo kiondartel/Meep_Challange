@@ -1,20 +1,25 @@
+import api from "../BaseHttp";
 import { Product } from "./payload/productPayload";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+export const PRODUCTS_PATH = "/products";
 
-// Peguei uma api publica que retorna alguns itens eletronicos
-export const fetchProducts = async (
-  page: number,
-  rows: number,
-  sortBy: string,
-  orderBy: "ASC" | "DESC"
-): Promise<Product[]> => {
-  const response = await fetch(
-    `${BASE_URL}/products?page=${page}&rows=${rows}&sortBy=${sortBy}&orderBy=${orderBy}`
-  );
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
+export class ProductService {
+  static async fetchProducts(
+    page: number,
+    rows: number,
+    sortBy: string,
+    orderBy: "ASC" | "DESC"
+  ): Promise<Product[]> {
+    try {
+      const response = await api.get(PRODUCTS_PATH, {
+        page: page,
+        rows: rows,
+        sortBy: sortBy,
+        orderBy: orderBy,
+      });
+      return response.data.products;
+    } catch (error) {
+      throw new Error(`Erro ao buscar produtos: ${error}`);
+    }
   }
-  const data = await response.json();
-  return data.products;
-};
+}
